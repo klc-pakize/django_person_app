@@ -1,3 +1,6 @@
+#description
+<p>In this project, it is aimed to create an application where staff users can create personnel, update, delete or read personnel they have created. Users without staff feature will be able to read all staff.👷🏻</p>
+
 # Models
 
 - Personnel
