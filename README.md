@@ -6,6 +6,7 @@
 - Personnel
 - Department
 - User
+
 ![Model](https://github.com/klc-pakize/django_person_app/blob/master/PersonnelAppERD.png)
 
 # Department
