@@ -1,3 +1,6 @@
+# Description
+<p>In this project, it is aimed to create an application where staff users can create personnel, update, delete or read personnel they have created. Users without staff feature will be able to read all staff. We also used class-based views to create custom functions and override some methods.👷🏻</p>
+
 # Models
 
 - Personnel
@@ -22,5 +25,5 @@
 
 # Live Project
 
-- <a href="https://pakizekilic.pythonanywhere.com">Live of the project</a>
-- <a href="https://pakizekilic.pythonanywhere.com/swagger/">For the swagger of the project</a>
+- <a href="https://pakize.pythonanywhere.com/">Live of the project</a>
+- <a href="https://pakize.pythonanywhere.com/swagger/">For the swagger of the project</a>
