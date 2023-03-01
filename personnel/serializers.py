@@ -17,7 +17,9 @@ class DepartmentSerializer(serializers.ModelSerializer):
         )
 
     def get_personnel_count(self, obj):
-        return obj.personnels.count()  # Calculates the number of people belonging to a department
+        # Calculates the number of people belonging to a department
+        # Bir departmana ait kişi sayısını hesaplar
+        return obj.personnels.count()  
 
 
 class PersonnelSerializer(serializers.ModelSerializer):
@@ -42,6 +44,7 @@ class PersonnelSerializer(serializers.ModelSerializer):
         )
 
 #! While creating the personnel, we process with the user token and reach the create user_id section automatically
+#! Personeli oluştururken user token ile işlem yapıyoruz ve otomatik olarak create user_id bölümüne ulaşıyoruz.
     def create(self, validated_data):
         validated_data["create_user_id"] = self.context["request"].user.id 
         instance = Personnel.objects.create(**validated_data)
@@ -49,6 +52,7 @@ class PersonnelSerializer(serializers.ModelSerializer):
 
 
 #! The time elapsed from the date of employment of the personnel to this date
+#! Personelin işe giriş tarihinden bu tarihe kadar geçen süre
     def get_days_since_jained(self, obj):
         return (now() - obj.start_date).days
 
@@ -64,4 +68,6 @@ class DepartmentPersonnelSerializer(serializers.ModelSerializer):
         fields = ("id", "name", "personnel_count", "personnels")
         
     def get_personnel_count(self, obj):
-        return obj.personnels.count() # Calculates the number of people belonging to a department
+        # Calculates the number of people belonging to a department
+        # Bir departmana ait kişi sayısını hesaplar
+        return obj.personnels.count() 

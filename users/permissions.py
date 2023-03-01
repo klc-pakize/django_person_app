@@ -7,4 +7,6 @@ class IsOwnerOrStaff(permissions.BasePermission):
         """
         Return `True` if permission is granted, `False` otherwise.
         """
-        return bool(request.user.is_staff or (obj.user == request.user))  # obj.user == request.user = Are the owner of the profile object and the user who made the request the same user ? If true, it can perform the update
+        #! obj.user == request.user = Are the owner of the profile object and the user who made the request the same user ? If true, it can perform the update
+        #! obj.user == request.user = Profil nesnesinin sahibi ve istekte bulunan kullanıcı aynı kullanıcı mı? Doğruysa, güncellemeyi gerçekleştirebilir
+        return bool(request.user.is_staff or (obj.user == request.user))  

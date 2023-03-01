@@ -38,6 +38,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 #! We have customized the TokenSerializer so that when the user logs in, not only the key information is returned, but also personal information.
+#! TokenSerializer'ı, kullanıcı oturum açtığında yalnızca anahtar bilgilerinin değil, kişisel bilgilerinin de döndürüleceği şekilde özelleştirdik.
 class UserTokenSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -62,10 +63,16 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ["id","user","user_id","display_name","avatar","bio"]
 
 #! In order not to get the user_id from the front end, we add the user_id part to automatically edit it with the help of the token while the profile owner is updating the profile from their environment.
-
+#! Profil sahibi kendi ortamından profili güncellerken user_id kısmını token yardımıyla otomatik olarak düzenlemesini sağlıyoruz.
     def update(self, instance, validated_data):
-        instance = super().update(instance, validated_data)  # We reached the parent with super(). We wanted it to continue using the default update method for fields in parent.
-        instance.user_id = self.context["request"].user.id  # instance = represents a row in the profile table in the database, we recorded the id of the user who made the request in the user_id of that row.
+        
+        # We reached the parent with super(). We wanted it to continue using the default update method for fields in parent.
+        # super() ile ebeveyne ulaştık. Ebeveyn içindeki alanlar için varsayılan güncelleme yöntemini kullanmaya devam etmesini istedik.
+        instance = super().update(instance, validated_data) 
+        
+        # instance = represents a row in the profile table in the database, we recorded the id of the user who made the request in the user_id of that row.
+        # instance = represents profil tablosundaki bir satırı temsil ediyor, isteği yapan kullanıcının kimliğini o satırın user_id kısmına kaydettik.
+        instance.user_id = self.context["request"].user.id  
         instance.save()
         return instance
         

@@ -23,10 +23,10 @@ class PersonnelView(ListCreateAPIView):
     queryset = Personnel.objects.all()
     serializer_class = PersonnelSerializer
     permission_classes = [IsAuthenticated]  # Unregistered users cannot take any action
-
+                                            # Kayıtsız kullanıcılar herhangi bir işlem yapamaz
 
 #! Non-staff users can only do get, staff users can create. We can do this with permissions, but we have seen that it is done in a different way.
-
+#! Personel olmayan kullanıcılar yalnızca view(görüntüleme)  işlemi yapabilir, sadece staff user create işlemi yapabilir. Bunu permissions ile yapabiliyoruz ama daha farklı bir şekilde yapıldığını da deneyimledik.
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -64,6 +64,7 @@ class DepartmentDetail(ListAPIView):
     queryset = Department.objects.all()
     
 #! We created it to be able to write dynamic endpoints
+#! Dinamik endpoint yazabilmek için oluşturduk
 
     def get_queryset(self):
         name = self.kwargs["department"]

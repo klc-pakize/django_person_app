@@ -18,6 +18,7 @@ class RegisterAPI(CreateAPIView):
     serializer_class = RegisterSerializer
 
 #! We will show the token information along with the user information
+#! Token bilgisini kullanıcı bilgileriyle birlikte göstereceğiz
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
